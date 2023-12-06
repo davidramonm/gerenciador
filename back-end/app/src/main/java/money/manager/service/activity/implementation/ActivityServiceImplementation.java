@@ -3,9 +3,6 @@ package money.manager.service.activity.implementation;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.google.common.collect.Collections2;
-
-import money.manager.domain.activity.Activity;
 import money.manager.domain.activity.type.Type.ActivityType;
 import money.manager.domain.gateway.ActivityGateway;
 import money.manager.service.activity.ActivityService;
@@ -13,8 +10,8 @@ import money.manager.service.activity.dto.InsertActivityOutputDto;
 import money.manager.service.activity.dto.InsertActivityInputDto;
 import money.manager.service.activity.dto.ListActivitiesOutputDto;
 import money.manager.service.activity.dto.mapper.ActivityToInsertActivityOutputMapper;
-import money.manager.service.activity.dto.mapper.ActivityToListActivityesOutputMapper;
-import money.manager.service.activity.dto.mapper.InserAcitivityInputToActivityMapper;
+import money.manager.service.activity.dto.mapper.ActivityToListActivitiesOutputMapper;
+import money.manager.service.activity.dto.mapper.InsertActivityInputToActivityMapper;
 
 public class ActivityServiceImplementation implements ActivityService {
 
@@ -30,7 +27,7 @@ public class ActivityServiceImplementation implements ActivityService {
 
     @Override
     public InsertActivityOutputDto insertActivity(final InsertActivityInputDto anInput) {
-        final var anActivity = InserAcitivityInputToActivityMapper.build().apply(anInput);
+        final var anActivity = InsertActivityInputToActivityMapper.build().apply(anInput);
 
         this.activityGateway.create(anActivity);
         return ActivityToInsertActivityOutputMapper.build().apply(anActivity);
@@ -43,11 +40,11 @@ public class ActivityServiceImplementation implements ActivityService {
     }
 
     @Override
-    public List<InsertActivityOutputDto> listActivities() {
+    public List<ListActivitiesOutputDto> listActivities() {
         final var aList = this.activityGateway.findAll();
 
         return aList.stream()
-                .map(a -> ActivityToListActivityesOutputMapper.build().apply(a))
+                .map(a -> ActivityToListActivitiesOutputMapper.build().apply(a))
                 .collect(Collectors.toList());
     }
 

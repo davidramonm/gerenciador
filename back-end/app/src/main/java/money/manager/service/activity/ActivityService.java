@@ -2,15 +2,18 @@ package money.manager.service.activity;
 
 import java.util.List;
 
-import money.manager.service.activity.dto.InsertActiviesOutputDto;
 import money.manager.service.activity.dto.InsertActivityInputDto;
-import money.manager.service.activity.dto.ListActiviesOutputDto;
+import money.manager.service.activity.dto.InsertActivityOutputDto;
+import money.manager.service.activity.dto.ListActivitiesOutputDto;
 
 public interface ActivityService {
-    
-    public InsertActiviesOutputDto insertActivity(InsertActivityInputDto anInput);
+
+    public InsertActivityOutputDto insertActivity(final InsertActivityInputDto anInput);
+
     public void removeActivity(final String anId);
-    public List<ListActiviesOutputDto> listActivities();
-    public void calculateBalance();
+
+    public List<ListActivitiesOutputDto> listActivities();
+
+    public float calculateBalance();
 
 }
